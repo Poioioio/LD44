@@ -21,26 +21,29 @@ public class CamAimPoint : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 unclampedAim = protag.position + protag.velocity.normalized * lookForwardFactor;
+        if (protag.velocity.sqrMagnitude > Mathf.Epsilon)
+        {
+            Vector2 unclampedAim = protag.position + protag.velocity.normalized * lookForwardFactor;
 
-        Vector3 minXY = Camera.main.ViewportToWorldPoint(new Vector3(-1, -1, 0));
-        Vector3 maxXY = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
-        Vector3 diff = (maxXY - minXY)/4f;
+            Vector3 minXY = Camera.main.ViewportToWorldPoint(new Vector3(-1, -1, 0));
+            Vector3 maxXY = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0));
+            Vector3 diff = (maxXY - minXY) / 4f;
 
-        Vector2 clampedAim = unclampedAim;
+            Vector2 clampedAim = unclampedAim;
 
-        if (unclampedAim.y < bottomBorder.transform.position.y + diff.y )
-            clampedAim.y = bottomBorder.transform.position.y + diff.y;
+            if (unclampedAim.y < bottomBorder.transform.position.y + diff.y)
+                clampedAim.y = bottomBorder.transform.position.y + diff.y;
 
-        if (unclampedAim.y > topBorder.transform.position.y - diff.y)
-            clampedAim.y = topBorder.transform.position.y - diff.y;
+            if (unclampedAim.y > topBorder.transform.position.y - diff.y)
+                clampedAim.y = topBorder.transform.position.y - diff.y;
 
-        if (unclampedAim.x < leftBorder.transform.position.x + diff.x)
-            clampedAim.x = leftBorder.transform.position.x + diff.x;
+            if (unclampedAim.x < leftBorder.transform.position.x + diff.x)
+                clampedAim.x = leftBorder.transform.position.x + diff.x;
 
-        if (unclampedAim.x > rightBorder.transform.position.x - diff.x)
-            clampedAim.x = rightBorder.transform.position.x - diff.x;
+            if (unclampedAim.x > rightBorder.transform.position.x - diff.x)
+                clampedAim.x = rightBorder.transform.position.x - diff.x;
 
-        transform.position = new Vector3(clampedAim.x, clampedAim.y, 0);
+            transform.position = new Vector3(clampedAim.x, clampedAim.y, 0);
+        }
     }
 }
