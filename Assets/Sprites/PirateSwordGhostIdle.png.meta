@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: -5216045481810937249
     second: PirateSwordGhostIdle_1
+  - first:
+      213: 4551226106533654915
+    second: PirateSwordGhostIdle_2
+  - first:
+      213: 7435787427253259964
+    second: PirateSwordGhostIdle_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -97,14 +103,14 @@ TextureImporter:
         y: 64
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edb2d02b2982b1d4a88b91ef0a5a4f7a
+      spriteID: d0c1ea25fa776274bbb03cca6c866f48
       internalID: 2268372238271903140
       vertices: []
       indices: 
@@ -118,14 +124,14 @@ TextureImporter:
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 8
+      pivot: {x: 1, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ab16f24e27fd704a8dd6955553f3f6c
+      spriteID: 9606d4a922ee3734d8f947439bd758c4
       internalID: -5216045481810937249
       vertices: []
       indices: 

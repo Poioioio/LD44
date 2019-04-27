@@ -305,8 +305,8 @@ GameObject:
   - component: {fileID: 1911555852}
   - component: {fileID: 1911555851}
   - component: {fileID: 1911555854}
-  - component: {fileID: 1911555853}
   - component: {fileID: 1911555855}
+  - component: {fileID: 1911555853}
   m_Layer: 0
   m_Name: Protag
   m_TagString: Untagged
@@ -388,6 +388,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5601159da3aa4644ba9efbdc9a876e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 10
+  facingRight: 1
 --- !u!61 &1911555854
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -667,12 +669,12 @@ PrefabInstance:
     - target: {fileID: 8486105123371093222, guid: b7d0a885a9a88f247ab8662a200271de,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15
+      value: 14.95
       objectReference: {fileID: 0}
     - target: {fileID: 8486105123371093222, guid: b7d0a885a9a88f247ab8662a200271de,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.74
+      value: 1.01
       objectReference: {fileID: 0}
     - target: {fileID: 8486105123371093222, guid: b7d0a885a9a88f247ab8662a200271de,
         type: 3}
