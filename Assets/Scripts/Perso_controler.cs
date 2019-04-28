@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Perso_controler : MonoBehaviour
 {
@@ -18,12 +19,22 @@ public class Perso_controler : MonoBehaviour
 
     public float jumpForce = 700f;
 
+    private Dictionary<string, int> inventory = new Dictionary<string, int>();
+
+    public Text copperText;
+    public Text silverText;
+    public Text goldText;
+
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
+
+        copperText.text = "";
+        silverText.text = "";
+        goldText.text = "";
     }
 
     // Update is called once per frame
@@ -56,4 +67,11 @@ public class Perso_controler : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+    }
 }
