@@ -69,7 +69,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8138604586296670709, guid: 4e70ed6d41b3c664eba947e9847608df,
+  m_Sprite: {fileID: 2268372238271903140, guid: 926f8a35d8e3aed45a6546905c575496,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 8216694895525475120}
   - component: {fileID: 4858699365637895783}
   - component: {fileID: 5839472917973948044}
+  - component: {fileID: 1167243604}
   m_Layer: 0
   m_Name: PirateSwordGhost
   m_TagString: Untagged
@@ -197,3 +198,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.33, y: 0.38}
   m_EdgeRadius: 0
+--- !u!114 &1167243604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486105123371093217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb2b5d381955974fba49db9a28b988a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 50
+  facingRight: 1
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 1
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 256
+  sight_distance: 10
