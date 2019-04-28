@@ -12,7 +12,6 @@ public class CaCphantom_controler : MonoBehaviour
     
     bool grounded = false;
     bool playerInSight = false;
-    float groundRadius = 0.2f;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
     float myWidth;
@@ -31,8 +30,6 @@ public class CaCphantom_controler : MonoBehaviour
 
     void FixedUpdate()
     {
-        //grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
-
         // Check if we are at the end of the plateforme
         Vector2 linecast_ground = transform.position - transform.right * myWidth;
         Debug.DrawLine(linecast_ground, linecast_ground + Vector2.down);
@@ -50,7 +47,7 @@ public class CaCphantom_controler : MonoBehaviour
         //float move = Input.GetAxis("Horizontal");
         float move = 0f;
 
-        if (playerInSight)
+        if (playerInSight && grounded)
         {
             move = facingRight ? 1 : -1;
         }
