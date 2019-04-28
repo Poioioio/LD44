@@ -22,7 +22,7 @@ public class Perso_controler : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
