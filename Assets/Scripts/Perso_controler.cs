@@ -22,8 +22,11 @@ public class Perso_controler : MonoBehaviour
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
     public Text copperText;
+    public Image copperImage;
     public Text silverText;
+    public Image silverImage;
     public Text goldText;
+    public Image goldImage;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +34,6 @@ public class Perso_controler : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
-
-        copperText.text = "";
-        silverText.text = "";
-        goldText.text = "";
     }
 
     // Update is called once per frame
@@ -72,6 +71,34 @@ public class Perso_controler : MonoBehaviour
         if (collision.gameObject.CompareTag("Coin"))
         {
             collision.gameObject.SetActive(false);
+
+            if(inventory.ContainsKey(collision.name))
+            {
+                inventory[collision.name] += 1;
+            }
+            else
+            {
+                inventory.Add(collision.name, 1);
+            }
+
+            if (collision.name == "CopperCoin")
+            {
+                copperText.gameObject.SetActive(true);
+                copperImage.gameObject.SetActive(true);
+                copperText.text = "Tibet coins : " + inventory["CopperCoin"].ToString();
+            }
+            else if (collision.name == "SilverCoin")
+            {
+                silverText.gameObject.SetActive(true);
+                silverImage.gameObject.SetActive(true);
+                silverText.text = "Drachmes : " + inventory["SilverCoin"].ToString();
+            }
+            else if (collision.name == "GoldCoin")
+            {
+                goldImage.gameObject.SetActive(true);
+                goldText.gameObject.SetActive(true);
+                goldText.text = "Stateres : " + inventory["GoldCoin"].ToString();
+            }
         }
     }
 }
