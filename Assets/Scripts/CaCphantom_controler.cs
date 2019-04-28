@@ -12,6 +12,7 @@ public class CaCphantom_controler : MonoBehaviour
     
     bool grounded = false;
     bool playerInSight = false;
+    bool playerInRange = false;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
     float myWidth;
@@ -38,18 +39,24 @@ public class CaCphantom_controler : MonoBehaviour
 
         // Check if player is seen
         Vector2 linecast_player = transform.position + transform.up * myHeight;
-        Debug.DrawLine(linecast_player, linecast_player + Vector2.right * sight_distance);
+        Debug.DrawLine(linecast_player, linecast_player + Vector2.right * myWidth);
         playerInSight = Physics2D.Linecast(linecast_player, linecast_player + Vector2.right * sight_distance, whatIsPlayer);
         anim.SetBool("PlayerInSight", playerInSight);
+        playerInRange = Physics2D.Linecast(linecast_player, linecast_player + Vector2.right * myWidth*2, whatIsPlayer);
 
         anim.SetFloat("vSpeed", rigid.velocity.y);
 
         //float move = Input.GetAxis("Horizontal");
         float move = 0f;
 
-        if (playerInSight && grounded)
+        if (playerInSight && grounded && !playerInRange)
         {
             move = facingRight ? 1 : -1;
+        }
+
+        if (playerInRange)
+        {
+            anim.SetTrigger("Attack");
         }
 
         anim.SetFloat("Speed", Mathf.Abs(move));
