@@ -100,6 +100,55 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1674271063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1674271064}
+  - component: {fileID: 1674271065}
+  m_Layer: 0
+  m_Name: seeker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1674271064
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674271063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.09, y: 0.627, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8486105123371093222}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1674271065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674271063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 086066bf35a478440901f5fec6405392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 5
+  is2D: 1
+  viewAngle: 90
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8486105123371093217
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +162,8 @@ GameObject:
   - component: {fileID: 4858699365637895783}
   - component: {fileID: 5839472917973948044}
   - component: {fileID: 1167243604}
+  - component: {fileID: 870041034}
+  - component: {fileID: 870041039}
   m_Layer: 0
   m_Name: PirateSwordGhost
   m_TagString: Untagged
@@ -129,9 +180,10 @@ Transform:
   m_GameObject: {fileID: 8486105123371093217}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 15.61, y: 1.73, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: -2, y: 2, z: 1}
   m_Children:
   - {fileID: 893847881}
+  - {fileID: 1674271064}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -205,13 +257,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8486105123371093217}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acb2b5d381955974fba49db9a28b988a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 50
-  facingRight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1
@@ -219,3 +270,29 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   sight_distance: 10
+--- !u!114 &870041034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486105123371093217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dbae6911255fc54b91ae6a3f8ffbe99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1167243604}
+--- !u!114 &870041039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8486105123371093217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ab750dc50cff94cb3ede32f9b9e810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facingRight: 1

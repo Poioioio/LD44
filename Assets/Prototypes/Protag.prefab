@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 1456951727952396676}
   - component: {fileID: 1456951727952396698}
   - component: {fileID: 1456951727952396696}
+  - component: {fileID: 850067633}
   m_Layer: 8
   m_Name: Protag
   m_TagString: Untagged
@@ -212,12 +213,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 7
-  facingRight: 1
   groundCheck: {fileID: 1456951728023261974}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 55
   jumpForce: 700
+--- !u!114 &850067633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456951727952396703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ab750dc50cff94cb3ede32f9b9e810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facingRight: 1
 --- !u!1 &1456951728023261975
 GameObject:
   m_ObjectHideFlags: 0

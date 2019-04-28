@@ -6,8 +6,8 @@ public class Perso_controler : MonoBehaviour
 {
 
     public float maxSpeed = 10f;
-    public bool facingRight = true;
 
+    Flipper flipper;
     Rigidbody2D rigid;
     Animator anim;
 
@@ -22,6 +22,7 @@ public class Perso_controler : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -39,9 +40,9 @@ public class Perso_controler : MonoBehaviour
 
         rigid.velocity = new Vector2(move * maxSpeed, rigid.velocity.y);
 
-        if ((move > 0 && !facingRight) || (move < 0 && facingRight))
+        if ((move > 0 && !flipper.facingRight) || (move < 0 && flipper.facingRight))
         {
-            Flip();
+            flipper.Flip();
         }
     }
 
@@ -55,11 +56,4 @@ public class Perso_controler : MonoBehaviour
         }
     }
 
-    void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-    }
 }

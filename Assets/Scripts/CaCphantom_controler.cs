@@ -5,10 +5,11 @@ using UnityEngine;
 public class CaCphantom_controler : MonoBehaviour
 {
     public float maxSpeed = .8f;
-    public bool facingRight = true;
 
     Rigidbody2D rigid;
     Animator anim;
+    Flipper flipper;
+    Seeker seeker;
     
     bool grounded = false;
     bool playerInSight = false;
@@ -24,7 +25,9 @@ public class CaCphantom_controler : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
+        seeker = GetComponentInChildren<Seeker>();
         myWidth = GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
         myHeight = GetComponentInChildren<SpriteRenderer>().bounds.extents.y;
     }
@@ -51,7 +54,7 @@ public class CaCphantom_controler : MonoBehaviour
 
         if (playerInSight && grounded && !playerInRange)
         {
-            move = facingRight ? 1 : -1;
+            move = flipper.facingRight ? 1 : -1;
         }
 
         if (playerInRange)
@@ -63,23 +66,11 @@ public class CaCphantom_controler : MonoBehaviour
 
         rigid.velocity = new Vector2(move * maxSpeed, rigid.velocity.y);
 
-        if ((move > 0 && !facingRight) || (move < 0 && facingRight))
+        if ((move > 0 && !flipper.facingRight) || (move < 0 && flipper.facingRight))
         {
-            Flip();
+            Debug.Log("fLIP");
+            flipper.Flip();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
-    }
 }
