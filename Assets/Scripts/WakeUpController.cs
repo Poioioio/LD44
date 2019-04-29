@@ -13,6 +13,9 @@ public class WakeUpController : MonoBehaviour
     {
         protag = FindObjectOfType<Perso_controler>().gameObject;
         seeker = GetComponentInChildren<Seeker>();
+
+        if(enabled)
+            controller.enabled = false;
     }
 
     // Update is called once per frame

@@ -8,7 +8,7 @@ public class CarrierEnemyController : AbstractEnemyController
     public Magpie magpie;
     public Transform handTransform;
     public float cooldown = 2f;
-    float timeSinceLoad = 2f;
+    public float timeSinceLoad = 2f;
     public float maxRange = 8;
 
 

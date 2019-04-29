@@ -115,8 +115,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 0.8
-  life: 2
+  life: 30
   callCooldown: 5
+  waves:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &246274337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 246274336}
+  awakeAtStart: 0
 --- !u!114 &246274338
 MonoBehaviour:
   m_ObjectHideFlags: 0

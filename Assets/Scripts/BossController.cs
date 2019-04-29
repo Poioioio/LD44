@@ -7,6 +7,9 @@ public class BossController : AbstractEnemyController
     public float callCooldown;
     float timeSinceLastCall;
 
+    public List<GameObject> waves;
+    int waveIndex = 0;
+
     protected override void Start()
     {
         timeSinceLastCall = callCooldown;
@@ -16,18 +19,23 @@ public class BossController : AbstractEnemyController
 
     private void Update()
     {
-        timeSinceLastCall += Time.deltaTime;
-
-        if( timeSinceLastCall > callCooldown )
+        if (waveIndex < waves.Count)
         {
-            anim.SetBool("Call", true);
+            timeSinceLastCall += Time.deltaTime;
+
+            if (timeSinceLastCall > callCooldown)
+            {
+                anim.SetBool("Call", true);
+            }
         }
     }
 
     public override void AbilityAnimTrigger()
     {
-        anim.SetBool("Call", true);
+        waves[waveIndex].SetActive(true);
+        waveIndex++;
+        timeSinceLastCall = 0f;
+        anim.SetBool("Call", false);
     }
-
 
 }

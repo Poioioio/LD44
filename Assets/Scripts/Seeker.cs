@@ -19,7 +19,7 @@ public class Seeker : MonoBehaviour
 
     private void Update()
     {
-        //CanSee(null);//good way to see the debug rays;
+        CanSee(null);//good way to see the debug rays;
     }
 
     // Checks if the obj's transform position is in view. Do not use for big objects with gigonormous colliders you might want to detect.
@@ -30,9 +30,9 @@ public class Seeker : MonoBehaviour
         if(is2D)
         {
             forward = transform.rotation * flipper.GetForward();
-            //Debug.DrawRay(transform.position, forward, Color.red, 1f);
-            //Debug.DrawRay(transform.position, Quaternion.Euler(0f, 0f, -viewAngle / 2f) * forward * viewRadius, Color.black, 1f);
-            //Debug.DrawRay(transform.position, Quaternion.Euler(0f, 0f, viewAngle / 2f) * forward * viewRadius, Color.black, 1f);
+            Debug.DrawRay(transform.position, forward, Color.red, 1f);
+            Debug.DrawRay(transform.position, Quaternion.Euler(0f, 0f, -viewAngle / 2f) * forward * viewRadius, Color.black, 1f);
+            Debug.DrawRay(transform.position, Quaternion.Euler(0f, 0f, viewAngle / 2f) * forward * viewRadius, Color.black, 1f);
         }
 
         if (obj == null)

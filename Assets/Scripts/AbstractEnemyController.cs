@@ -40,8 +40,6 @@ public class AbstractEnemyController : AbstractController
         wkCtrlr = GetComponent<WakeUpController>();
         protag = FindObjectOfType<Perso_controler>();
         spriteEventManager = GetComponentInChildren<SpriteEventManager>();
-
-        enabled = false;
     }
 
     public override void TakeDamageFrom(AbstractController enmy, bool bumpRight, float force)
@@ -67,6 +65,11 @@ public class AbstractEnemyController : AbstractController
 
                 gameObject.SetActive(false);
                 Destroy(gameObject);
+            }
+            else
+            {
+                enabled = true;
+                wkCtrlr.enabled = false;
             }
             anim.SetTrigger("Hurt");
         }
