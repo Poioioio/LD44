@@ -120,6 +120,20 @@ public class Magpie : MonoBehaviour
         }
     }
 
+    public bool Catched()
+    {
+        if (state == State.getBackToHand)
+        {
+            GameObject empty = transform.parent.gameObject;
+            transform.SetParent(hand);
+            transform.localPosition = Vector3.zero;
+            gameObject.SetActive(false);
+            return true;
+        }
+
+        return false;
+    }
+
     public void Flee()
     {        
         flee = true;

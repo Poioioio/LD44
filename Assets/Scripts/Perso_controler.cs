@@ -102,9 +102,7 @@ public class Perso_controler : AbstractController
             }
         }
         else if( collision.gameObject.CompareTag("Projectile"))
-        {
-            Debug.Log("Boop " + collision.name);
-            
+        {            
             TakeDamageFrom(null, true, 0f);
         }
     }

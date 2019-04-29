@@ -22,12 +22,12 @@ public class CarrierEnemyController : AbstractEnemyController
 
         flipper.LookAt(protag.gameObject);
 
-        if(loaded)
+        if (loaded)
         {
             timeSinceLoad += Time.deltaTime;
-            if( timeSinceLoad >= cooldown )
+            if (timeSinceLoad >= cooldown)
             {
-                if( Vector2.Distance(protag.transform.position, transform.position) < maxRange)
+                if (Vector2.Distance(protag.transform.position, transform.position) < maxRange)
                     Shoot();
             }
         }
@@ -39,15 +39,32 @@ public class CarrierEnemyController : AbstractEnemyController
         anim.SetBool("Loaded", loaded);
         timeSinceLoad = 0f;
         magpie.Release(handTransform.position, transform.localScale);
-    }    
+    }
+
+    void Reload()
+    {
+        loaded = true;
+        anim.SetBool("Loaded", loaded);
+        timeSinceLoad = 0f;
+    }
 
     public override void TakeDamageFrom(AbstractController enmy, bool bumpRight, float force)
     {
         if (loaded)
             magpie.Release(handTransform.position, transform.localScale);
-        
+
         magpie.Flee();
 
         base.TakeDamageFrom(enmy, bumpRight, force);
+    }
+
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == magpie.gameObject)
+        {
+            if (magpie.Catched())
+                Reload();
+        }
     }
 }

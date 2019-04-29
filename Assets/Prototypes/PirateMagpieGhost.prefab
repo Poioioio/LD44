@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 8430031263054626891}
   - component: {fileID: 2177338784459782100}
   - component: {fileID: 526437041}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MagpieGhost
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6488204450512428603}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.107, y: 0.345, z: 0}
+  m_LocalPosition: {x: -0.151, y: 0.392, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2986046089827910475}
@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 1738258856}
   - component: {fileID: 1738258857}
   - component: {fileID: 9108967046066393369}
+  - component: {fileID: 1762893501}
   m_Layer: 10
   m_Name: PirateMagpieGhost
   m_TagString: Untagged
@@ -313,6 +314,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.275}
   m_Size: {x: 0.26, y: 0.55}
   m_Direction: 0
+--- !u!50 &1762893501
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6723991862572218987}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7435266815178169706
 GameObject:
   m_ObjectHideFlags: 0
