@@ -93,24 +93,22 @@ public class Magpie : MonoBehaviour
             transform.eulerAngles = new Vector3(0f, 0f, 90f);
         else transform.eulerAngles = Vector3.zero;
 
+        Vector3 newScale = new Vector3(Mathf.Abs(transform.localScale.x), Mathf.Abs(transform.localScale.y), 1f);
         if (dir.x < -Mathf.Epsilon)
         {
             if (dir.y >= Mathf.Epsilon)
-                transform.localScale = new Vector3(1f, -1f, 1f);
+                newScale.Scale(new Vector3(1f, -1f, 1f));
             else
-                transform.localScale = new Vector3(-1f, 1f, 1f);
+                newScale.Scale(new Vector3(-1f, 1f, 1f));
         }
-        else
-        {
-            transform.localScale = Vector3.one;
-        }
+
+        transform.localScale = newScale;
     }
 
     public void Release( Vector3 startPosition, Vector3 scale )
     {
         gameObject.SetActive(true);
         GameObject empty = new GameObject();
-        transform.localScale.Scale(scale);
         transform.position = startPosition;
         transform.SetParent(empty.transform, true);
         if (!flee)

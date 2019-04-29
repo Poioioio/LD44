@@ -38,6 +38,7 @@ public class CarrierEnemyController : AbstractEnemyController
         loaded = false;
         anim.SetBool("Loaded", loaded);
         timeSinceLoad = 0f;
+        Debug.Log("shoot " + transform.localScale);
         magpie.Release(handTransform.position, transform.localScale);
     }
 
