@@ -31,6 +31,14 @@ public class HUD : MonoBehaviour
     public Text goldText;
     public Image goldImage;
 
+    public Image showCopper;
+    public Image showSilver;
+    public Image showGold;
+
+    private bool firstCopper = true;
+    private bool firstSilver = true;
+    private bool firstGold = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +48,24 @@ public class HUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 1f;
+            showCopper.gameObject.SetActive(false);
+            showSilver.gameObject.SetActive(false);
+            showGold.gameObject.SetActive(false);
+        }
     }
 
     public void UpdateCopperCoin(int nb)
     {
+        if (firstCopper)
+        {
+            firstCopper = false;
+            showCopper.gameObject.SetActive(true);
+            Time.timeScale = 0.01f;
+        }
+
         bool gotSome = nb > 0;
         copperText.gameObject.SetActive(gotSome);
         copperImage.gameObject.SetActive(gotSome);
@@ -53,6 +74,13 @@ public class HUD : MonoBehaviour
 
     public void UpdateSilverCoin(int nb)
     {
+        if (firstSilver)
+        {
+            firstSilver = false;
+            showSilver.gameObject.SetActive(true);
+            Time.timeScale = 0.01f;
+        }
+
         bool gotSome = nb > 0;
         silverText.gameObject.SetActive(gotSome);
         silverImage.gameObject.SetActive(gotSome);
@@ -61,6 +89,13 @@ public class HUD : MonoBehaviour
 
     public void UpdateGoldCoin(int nb)
     {
+        if (firstGold)
+        {
+            firstGold = false;
+            showGold.gameObject.SetActive(true);
+            Time.timeScale = 0.01f;
+        }
+
         bool gotSome = nb > 0;
         goldText.gameObject.SetActive(gotSome);
         goldImage.gameObject.SetActive(gotSome);
