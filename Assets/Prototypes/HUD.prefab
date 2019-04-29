@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1040811194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -91,12 +91,12 @@ GameObject:
   - component: {fileID: 1465358595}
   - component: {fileID: 1465358594}
   m_Layer: 5
-  m_Name: Image
+  m_Name: imageGold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1465358593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -165,12 +165,12 @@ GameObject:
   - component: {fileID: 1678472646}
   - component: {fileID: 1678472645}
   m_Layer: 5
-  m_Name: Text
+  m_Name: nbGold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1678472644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -244,12 +244,12 @@ GameObject:
   - component: {fileID: 1701444317}
   - component: {fileID: 1701444316}
   m_Layer: 5
-  m_Name: tibet
+  m_Name: imageCopper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1701444315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -318,12 +318,12 @@ GameObject:
   - component: {fileID: 1737098927}
   - component: {fileID: 1737098926}
   m_Layer: 5
-  m_Name: drachme
+  m_Name: imageSilver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1737098925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -389,6 +389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 913782116530657128}
+  - component: {fileID: 777216558}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -411,6 +412,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &777216558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913782116530657129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb98cdbfc8f0ec4b9dab03526ecac69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  copperText: {fileID: 535894002962780076}
+  copperImage: {fileID: 1701444316}
+  silverText: {fileID: 1040811195}
+  silverImage: {fileID: 1737098926}
+  goldText: {fileID: 1678472645}
+  goldImage: {fileID: 1465358594}
 --- !u!1 &2943837717309066806
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7320461332072744895
 RectTransform:
   m_ObjectHideFlags: 0

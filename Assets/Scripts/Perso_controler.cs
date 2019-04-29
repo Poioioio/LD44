@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Perso_controler : AbstractController
 {
@@ -19,14 +18,14 @@ public class Perso_controler : AbstractController
 
     public float jumpForce = 700f;
 
+    public Collider2D attackCollider;
+    public ContactFilter2D attackFilter;
+
+    public float bumpForce = 100f;
+
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
-    public Text copperText;
-    public Image copperImage;
-    public Text silverText;
-    public Image silverImage;
-    public Text goldText;
-    public Image goldImage;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +37,8 @@ public class Perso_controler : AbstractController
         inventory["CopperCoin"] = 3;
         inventory["SilverCoin"] = 0;
         inventory["GoldCoin"] = 0;
+
+        HUD.GetInstance().UpdateCopperCoin(inventory["CopperCoin"]);
     }
 
     // Update is called once per frame
@@ -62,21 +63,14 @@ public class Perso_controler : AbstractController
 
     void Update()
     {
-        if(grounded && Input.GetAxis("Jump")> Mathf.Epsilon)//Input.GetKeyDown(KeyCode.Space))
-            anim.SetBool("Jump",true);
-        else
-            anim.SetBool("Jump", false);
+        bool inputJump = grounded && Input.GetAxis("Jump") > Mathf.Epsilon;
+        anim.SetBool("Jump", inputJump);
 
-        if ( grounded && Input.GetAxis("Fire1") > Mathf.Epsilon)
-            anim.SetBool("Attack",true);
-        else
-            anim.SetBool("Attack", false);
+        bool inputFire = grounded && Input.GetAxis("Fire1") > Mathf.Epsilon;
+        anim.SetBool("Attack", inputFire);
 
-        if (grounded && Input.GetAxis("Fire2") > Mathf.Epsilon)
-            anim.SetBool("Rob", true);
-        else
-            anim.SetBool("Rob", false);
-
+        bool inputFire2 = grounded && Input.GetAxis("Fire2") > Mathf.Epsilon;
+        anim.SetBool("Rob", inputFire2);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -96,22 +90,22 @@ public class Perso_controler : AbstractController
 
             if (collision.name == "CopperCoin")
             {
-                copperText.gameObject.SetActive(true);
-                copperImage.gameObject.SetActive(true);
-                copperText.text = "Tibet coins : " + inventory["CopperCoin"].ToString();
+                HUD.GetInstance().UpdateCopperCoin(inventory["CopperCoin"]);
             }
             else if (collision.name == "SilverCoin")
             {
-                silverText.gameObject.SetActive(true);
-                silverImage.gameObject.SetActive(true);
-                silverText.text = "Drachmes : " + inventory["SilverCoin"].ToString();
+                HUD.GetInstance().UpdateSilverCoin(inventory["SilverCoin"]);
             }
             else if (collision.name == "GoldCoin")
             {
-                goldImage.gameObject.SetActive(true);
-                goldText.gameObject.SetActive(true);
-                goldText.text = "Stateres : " + inventory["GoldCoin"].ToString();
+                HUD.GetInstance().UpdateGoldCoin(inventory["GoldCoin"]);
             }
+        }
+        else if( collision.gameObject.CompareTag("Projectile"))
+        {
+            Debug.Log("Boop " + collision.name);
+            
+            TakeDamageFrom(null, true, 0f);
         }
     }
 
@@ -128,7 +122,8 @@ public class Perso_controler : AbstractController
                 DropSilvers();
             else if (inventory["GoldCoin"] > 0)
                 DropGolds();
-            else
+            
+            if( !HasCoins())
             {
                 anim.SetBool("Dead", true);
                 enabled = false;
@@ -137,25 +132,32 @@ public class Perso_controler : AbstractController
         }
     }
 
+    bool HasCoins()
+    {
+        return ((inventory["CopperCoin"] > 0)
+            || (inventory["SilverCoin"] > 0)
+            || (inventory["GoldCoin"] > 0));
+    }
+
     void DropCoppers()
     {
         Debug.Log("DropCoppers : ");
         inventory["CopperCoin"] = 0;
-
+        HUD.GetInstance().UpdateCopperCoin(0);
     }
 
     void DropSilvers()
     {
         Debug.Log("DropSilvers");
         inventory["SilverCoin"] = 0;
-
+        HUD.GetInstance().UpdateSilverCoin(0);
     }
 
     void DropGolds()
     {
         Debug.Log("DropGolds");
         inventory["GoldCoin"] = 0;
-
+        HUD.GetInstance().UpdateGoldCoin(0);
     }
 
 
@@ -163,22 +165,16 @@ public class Perso_controler : AbstractController
     {
         List<Collider2D> targetList = new List<Collider2D>();
 
-        if (1 == Physics2D.OverlapCollider(attackCollider, attackFilter, targetList))
+        if (0 < Physics2D.OverlapCollider(attackCollider, attackFilter, targetList))
         {
             foreach (Collider2D target in targetList)
                 target.gameObject.GetComponent<AbstractController>().TakeDamageFrom(this, flipper.facingRight, bumpForce);
-        }
-        else
-        {
-            foreach (Collider2D target in targetList)
-                Debug.Log(target);
-
         }
     }
 
     public override void JumpAnimTrigger()
     {
-        rigid.AddForce(new Vector2(0, jumpForce));
+        rigid.AddForce(Vector2.up*jumpForce);
     }
 
     public override void DeathAnimTrigger()
