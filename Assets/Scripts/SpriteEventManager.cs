@@ -16,6 +16,11 @@ public class SpriteEventManager : MonoBehaviour
         ctrl.HitAnimTrigger();
     }
 
+    public void CallAbilityAnimTrigger()
+    {
+        ctrl.AbilityAnimTrigger();
+    }
+
     public void CallJumpAnimTrigger()
     {
         ctrl.JumpAnimTrigger();
