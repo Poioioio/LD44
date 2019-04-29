@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Perso_controler : MonoBehaviour
+public class Perso_controler : AbstractController
 {
 
     public float maxSpeed = 10f;
@@ -34,6 +34,10 @@ public class Perso_controler : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
+
+        inventory["CopperCoin"] = 3;
+        inventory["SilverCoin"] = 0;
+        inventory["GoldCoin"] = 0;
     }
 
     // Update is called once per frame
@@ -58,11 +62,16 @@ public class Perso_controler : MonoBehaviour
 
     void Update()
     {
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        Debug.Log(Input.GetAxis("Jump"));
+        if(grounded && Input.GetAxis("Jump")> Mathf.Epsilon)//Input.GetKeyDown(KeyCode.Space))
         {
-            anim.SetBool("Ground", false);
+            anim.SetBool("Jump",true);
+        }
+        else anim.SetBool("Jump", false);
 
-            rigid.AddForce(new Vector2(0, jumpForce));
+        if ( grounded && Input.GetAxis("Fire1") > Mathf.Epsilon)
+        {
+            anim.SetTrigger("Attack");
         }
     }
 
@@ -100,5 +109,64 @@ public class Perso_controler : MonoBehaviour
                 goldText.text = "Stateres : " + inventory["GoldCoin"].ToString();
             }
         }
+    }
+
+    public void TakeDamageFrom(CaCphantom_controler enmy)
+    {
+        if (isActiveAndEnabled)
+        {
+            rigid.velocity = Vector2.zero;
+            if (inventory["CopperCoin"] > 0)
+                DropCoppers();
+            else if (inventory["SilverCoin"] > 0)
+                DropSilvers();
+            else if (inventory["GoldCoin"] > 0)
+                DropGolds();
+            else
+            {
+                anim.SetBool("Dead", true);
+                enabled = false;
+            }
+            anim.SetTrigger("Hurt");
+        }
+    }
+
+    void DropCoppers()
+    {
+        Debug.Log("DropCoppers : ");
+        inventory["CopperCoin"] = 0;
+
+    }
+
+    void DropSilvers()
+    {
+        Debug.Log("DropSilvers");
+        inventory["SilverCoin"] = 0;
+
+    }
+
+    void DropGolds()
+    {
+        Debug.Log("DropGolds");
+        inventory["GoldCoin"] = 0;
+
+    }
+
+
+    public override void HitAnimTrigger()
+    {
+
+    }
+
+    public override void JumpAnimTrigger()
+    {
+        Debug.Log("JUMP");
+        rigid.AddForce(new Vector2(0, jumpForce));
+        //rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    public override void DeathAnimTrigger()
+    {
+        //game Over text. R to restart
     }
 }

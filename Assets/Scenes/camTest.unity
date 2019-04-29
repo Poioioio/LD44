@@ -1196,6 +1196,10 @@ PrefabInstance:
       propertyPath: topBorder
       value: 
       objectReference: {fileID: 2147069968}
+    - target: {fileID: 1500836897, guid: ba54485e45f326e4a975c7c1c67e90f8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba54485e45f326e4a975c7c1c67e90f8, type: 3}
 --- !u!1001 &7144704062568423024

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaCphantom_controler : MonoBehaviour
+public class CaCphantom_controler : AbstractController
 {
     public float maxSpeed = .8f;
 
@@ -10,10 +10,14 @@ public class CaCphantom_controler : MonoBehaviour
     Animator anim;
     Flipper flipper;
     Seeker seeker;
+
+    public Collider2D attackCollider;
+    public ContactFilter2D attackFilter;
+
+    Perso_controler protag;
     
     bool grounded = false;
-    bool playerInSight = false;
-    bool playerInRange = false;
+    bool playerInAttackRange = false;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
     float myWidth;
@@ -30,12 +34,23 @@ public class CaCphantom_controler : MonoBehaviour
         seeker = GetComponentInChildren<Seeker>();
         myWidth = GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
         myHeight = GetComponentInChildren<SpriteRenderer>().bounds.extents.y;
+
+        protag = FindObjectOfType<Perso_controler>();
+        enabled = false;
     }
 
     void FixedUpdate()
     {
+        if( !protag.isActiveAndEnabled )
+        {
+            enabled = false;
+            return;
+        }
+
+        flipper.LookAt(protag.gameObject);
+
         // Check if we are at the end of the plateforme
-        Vector2 linecast_ground = transform.position - transform.right * myWidth;
+        Vector2 linecast_ground = transform.position;// - transform.right * myWidth;
         Debug.DrawLine(linecast_ground, linecast_ground + Vector2.down);
         grounded = Physics2D.Linecast(linecast_ground, linecast_ground + Vector2.down, whatIsGround);
         anim.SetBool("Ground", grounded);
@@ -43,33 +58,35 @@ public class CaCphantom_controler : MonoBehaviour
         // Check if player is seen
         Vector2 linecast_player = transform.position + transform.up * myHeight;
         Debug.DrawLine(linecast_player, linecast_player + Vector2.right * myWidth);
-        playerInSight = Physics2D.Linecast(linecast_player, linecast_player + Vector2.right * sight_distance, whatIsPlayer);
-        anim.SetBool("PlayerInSight", playerInSight);
-        playerInRange = Physics2D.Linecast(linecast_player, linecast_player + Vector2.right * myWidth*2, whatIsPlayer);
+        playerInAttackRange = Physics2D.Linecast(linecast_player, linecast_player + flipper.GetForward2D() * myWidth*2, whatIsPlayer);
 
         anim.SetFloat("vSpeed", rigid.velocity.y);
 
         //float move = Input.GetAxis("Horizontal");
         float move = 0f;
 
-        if (playerInSight && grounded && !playerInRange)
+        if (grounded && !playerInAttackRange)
         {
             move = flipper.facingRight ? 1 : -1;
+
+            anim.SetFloat("Speed", Mathf.Abs(move));
+            rigid.velocity = new Vector2(move * maxSpeed, rigid.velocity.y);
         }
 
-        if (playerInRange)
+        if (playerInAttackRange)
         {
             anim.SetTrigger("Attack");
         }
 
-        anim.SetFloat("Speed", Mathf.Abs(move));
+    }
 
-        rigid.velocity = new Vector2(move * maxSpeed, rigid.velocity.y);
+    public override void HitAnimTrigger()
+    {
+        Collider2D[] target = new Collider2D[1];
 
-        if ((move > 0 && !flipper.facingRight) || (move < 0 && flipper.facingRight))
+        if( 1 == Physics2D.OverlapCollider(attackCollider, attackFilter, target))
         {
-            Debug.Log("fLIP");
-            flipper.Flip();
+            target[0].gameObject.GetComponent<Perso_controler>().TakeDamageFrom(this);
         }
     }
 

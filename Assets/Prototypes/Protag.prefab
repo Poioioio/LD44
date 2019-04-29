@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 863837219}
   - component: {fileID: 863837221}
   - component: {fileID: 863837220}
+  - component: {fileID: 1065378515}
   m_Layer: 0
   m_Name: NumismateIdle_0
   m_TagString: Untagged
@@ -100,6 +101,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1065378515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863837218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88ac3669d5c3bfc46987bd5402948b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1456951727952396703
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +231,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   jumpForce: 700
+  copperText: {fileID: 0}
+  copperImage: {fileID: 0}
+  silverText: {fileID: 0}
+  silverImage: {fileID: 0}
+  goldText: {fileID: 0}
+  goldImage: {fileID: 0}
 --- !u!114 &850067633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
+  margin: 0.2
 --- !u!1 &1456951728023261975
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,11 +6,16 @@ public class Seeker : MonoBehaviour
 {
     public float viewRadius=5f;
     public bool is2D = true;
-
+    Flipper flipper;
     [Range(0, 360)]
     public float viewAngle=90f;
     
     public LayerMask obstacleMask;
+
+    private void Start()
+    {
+        flipper = GetComponentInParent<Flipper>();
+    }
 
     // Checks if the obj's transform position is in view. Do not use for big objects with gigonormous colliders you might want to detect.
     // still need obj to have a collider though.
@@ -18,7 +23,7 @@ public class Seeker : MonoBehaviour
     {
         if (Vector3.Distance(obj.transform.position, transform.position) > viewRadius)
         {
-            Debug.Log("OUT OF VIEW RADIUS");
+            //Debug.Log("OUT OF VIEW RADIUS");
             return false;
         }
 
@@ -27,12 +32,12 @@ public class Seeker : MonoBehaviour
 
         Vector3 forward = Vector3.forward;
         if(is2D)
-            forward = Vector3.right;
+            forward = flipper.GetForward();
 
         float angle = Vector3.Angle(forward, lookAtObj);
         if (angle > viewAngle / 2)
         {
-            Debug.Log("OUT OF VIEW ANGLE : " + angle + " from vectors " + forward + " and " + lookAtObj);
+            //Debug.Log("OUT OF VIEW ANGLE : " + angle + " from vectors " + forward + " and " + lookAtObj);
             return false;
         }
         //Debug.Log("IN VIEW RADIUS AND ANGLE");
@@ -42,7 +47,7 @@ public class Seeker : MonoBehaviour
             //Debug.Log("OBSTACLE IN THE WAY");
             return false;
         }
-        Debug.Log("final result : obj in view !");
+        //Debug.Log("final result : obj in view !");
 
         return true;
     }
