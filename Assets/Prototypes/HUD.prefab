@@ -972,6 +972,9 @@ MonoBehaviour:
   silverImage: {fileID: 1737098926}
   goldText: {fileID: 1678472645}
   goldImage: {fileID: 1465358594}
+  showCopper: {fileID: 1463792444}
+  showSilver: {fileID: 644835930}
+  showGold: {fileID: 852673368}
 --- !u!1 &2943837717309066806
 GameObject:
   m_ObjectHideFlags: 0
