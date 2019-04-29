@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 893847882}
   - component: {fileID: 893847883}
   - component: {fileID: 1582416708}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PirateSwordGhostSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1674271064}
   - component: {fileID: 1674271065}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: seeker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 870041034}
   - component: {fileID: 870041039}
   - component: {fileID: 8486105122209543709}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PirateSwordGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb2b5d381955974fba49db9a28b988a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
   attackCollider: {fileID: 8486105122209543709}
   attackFilter:
     useTriggers: 0
@@ -292,6 +291,8 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
+  bumpForce: 100
+  maxSpeed: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1

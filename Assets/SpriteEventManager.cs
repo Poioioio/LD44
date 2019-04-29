@@ -22,6 +22,9 @@ public class SpriteEventManager : MonoBehaviour
 
     public void CallDeathAnimTrigger()
     {
-        ctrl.DeathAnimTrigger();
+        if( ctrl != null)
+            ctrl.DeathAnimTrigger();
+
+        //Destroy(gameObject);
     }
 }

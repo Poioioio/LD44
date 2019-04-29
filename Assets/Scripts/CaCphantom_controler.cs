@@ -10,12 +10,13 @@ public class CaCphantom_controler : AbstractController
     Animator anim;
     Flipper flipper;
     Seeker seeker;
-
-    public Collider2D attackCollider;
-    public ContactFilter2D attackFilter;
+    WakeUpController wkCtrlr;
+    SpriteEventManager spriteEventManager;
+    SpriteRenderer spriteRenderer;
 
     Perso_controler protag;
-    
+
+    public int life = 2;
     bool grounded = false;
     bool playerInAttackRange = false;
     public LayerMask whatIsGround;
@@ -29,13 +30,20 @@ public class CaCphantom_controler : AbstractController
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
-        seeker = GetComponentInChildren<Seeker>();
-        myWidth = GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
-        myHeight = GetComponentInChildren<SpriteRenderer>().bounds.extents.y;
 
+        flipper = GetComponent<Flipper>();
+        seeker = GetComponentInChildren<Seeker>();
+
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        myWidth = spriteRenderer.bounds.extents.x;
+        myHeight = spriteRenderer.bounds.extents.y;
+
+        wkCtrlr = GetComponent<WakeUpController>();
         protag = FindObjectOfType<Perso_controler>();
+        spriteEventManager = GetComponentInChildren<SpriteEventManager>();
+
+        
         enabled = false;
     }
 
@@ -86,8 +94,30 @@ public class CaCphantom_controler : AbstractController
 
         if( 1 == Physics2D.OverlapCollider(attackCollider, attackFilter, target))
         {
-            target[0].gameObject.GetComponent<Perso_controler>().TakeDamageFrom(this);
+            target[0].gameObject.GetComponent<AbstractController>().TakeDamageFrom(this, flipper.facingRight, bumpForce);
         }
     }
 
+    public override void TakeDamageFrom(AbstractController enmy, bool bumpRight, float force)
+    {
+        if(anim.GetBool("Dead") == false)
+        {
+            rigid.velocity = Vector2.zero;
+            Vector2 bumpDir = bumpRight ? Vector2.right : Vector2.left;
+            rigid.AddForce(bumpDir * force);
+            life--;
+            if (life <= 0)
+            {
+                anim.SetBool("Dead", true);
+                enabled = false;
+                wkCtrlr.enabled = false;
+                
+                //transform.DetachChildren();
+                gameObject.SetActive(false);
+                Destroy(gameObject);
+                Destroy(seeker.gameObject);
+            }
+            anim.SetTrigger("Hurt");
+        }
+    }
 }

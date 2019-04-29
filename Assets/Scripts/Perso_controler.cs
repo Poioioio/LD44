@@ -62,17 +62,21 @@ public class Perso_controler : AbstractController
 
     void Update()
     {
-        Debug.Log(Input.GetAxis("Jump"));
         if(grounded && Input.GetAxis("Jump")> Mathf.Epsilon)//Input.GetKeyDown(KeyCode.Space))
-        {
             anim.SetBool("Jump",true);
-        }
-        else anim.SetBool("Jump", false);
+        else
+            anim.SetBool("Jump", false);
 
         if ( grounded && Input.GetAxis("Fire1") > Mathf.Epsilon)
-        {
-            anim.SetTrigger("Attack");
-        }
+            anim.SetBool("Attack",true);
+        else
+            anim.SetBool("Attack", false);
+
+        if (grounded && Input.GetAxis("Fire2") > Mathf.Epsilon)
+            anim.SetBool("Rob", true);
+        else
+            anim.SetBool("Rob", false);
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -111,11 +115,13 @@ public class Perso_controler : AbstractController
         }
     }
 
-    public void TakeDamageFrom(CaCphantom_controler enmy)
+    public override void TakeDamageFrom(AbstractController enmy, bool bumpRight, float force)
     {
         if (isActiveAndEnabled)
         {
             rigid.velocity = Vector2.zero;
+            Vector2 bumpDir = bumpRight ? Vector2.right : Vector2.left;
+            rigid.AddForce(bumpDir * force);
             if (inventory["CopperCoin"] > 0)
                 DropCoppers();
             else if (inventory["SilverCoin"] > 0)
@@ -155,14 +161,21 @@ public class Perso_controler : AbstractController
 
     public override void HitAnimTrigger()
     {
+        Collider2D[] target = new Collider2D[1];
+        Debug.Log("aaa");
 
+        if (1 == Physics2D.OverlapCollider(attackCollider, attackFilter, target))
+        {
+            Debug.Log("zzzz");
+
+            target[0].gameObject.GetComponent<AbstractController>().TakeDamageFrom(this, flipper.facingRight, bumpForce);
+        }
     }
 
     public override void JumpAnimTrigger()
     {
         Debug.Log("JUMP");
         rigid.AddForce(new Vector2(0, jumpForce));
-        //rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
     public override void DeathAnimTrigger()
