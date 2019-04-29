@@ -161,20 +161,23 @@ public class Perso_controler : AbstractController
 
     public override void HitAnimTrigger()
     {
-        Collider2D[] target = new Collider2D[1];
-        Debug.Log("aaa");
+        List<Collider2D> targetList = new List<Collider2D>();
 
-        if (1 == Physics2D.OverlapCollider(attackCollider, attackFilter, target))
+        if (1 == Physics2D.OverlapCollider(attackCollider, attackFilter, targetList))
         {
-            Debug.Log("zzzz");
+            foreach (Collider2D target in targetList)
+                target.gameObject.GetComponent<AbstractController>().TakeDamageFrom(this, flipper.facingRight, bumpForce);
+        }
+        else
+        {
+            foreach (Collider2D target in targetList)
+                Debug.Log(target);
 
-            target[0].gameObject.GetComponent<AbstractController>().TakeDamageFrom(this, flipper.facingRight, bumpForce);
         }
     }
 
     public override void JumpAnimTrigger()
     {
-        Debug.Log("JUMP");
         rigid.AddForce(new Vector2(0, jumpForce));
     }
 

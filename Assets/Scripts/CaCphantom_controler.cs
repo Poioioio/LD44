@@ -111,11 +111,12 @@ public class CaCphantom_controler : AbstractController
                 anim.SetBool("Dead", true);
                 enabled = false;
                 wkCtrlr.enabled = false;
-                
-                //transform.DetachChildren();
+                GameObject empty = new GameObject();
+                empty.transform.position = transform.position;
+                spriteRenderer.transform.SetParent(empty.transform, true);
+
                 gameObject.SetActive(false);
                 Destroy(gameObject);
-                Destroy(seeker.gameObject);
             }
             anim.SetTrigger("Hurt");
         }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpriteEventManager : MonoBehaviour
 {
     AbstractController ctrl;
+    public bool destroyParentAtTheEnd = true;//useful to destroy rigidbody at the beginning of the anim and the sprite at the end of it.
+
     private void Start()
     {
         ctrl = GetComponentInParent<AbstractController>();
@@ -16,7 +18,6 @@ public class SpriteEventManager : MonoBehaviour
 
     public void CallJumpAnimTrigger()
     {
-        Debug.Log("Sptr");
         ctrl.JumpAnimTrigger();
     }
 
@@ -25,6 +26,7 @@ public class SpriteEventManager : MonoBehaviour
         if( ctrl != null)
             ctrl.DeathAnimTrigger();
 
-        //Destroy(gameObject);
+        if(destroyParentAtTheEnd)
+            Destroy(transform.parent.gameObject);
     }
 }
