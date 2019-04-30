@@ -108,6 +108,15 @@ public class Perso_controler : AbstractController
         {            
             TakeDamageFrom(null, true, 0f);
         }
+        else if (collision.gameObject.CompareTag("Defeat"))
+        {
+            HUD.GetInstance().ShowGameOver();
+        }
+        else if (collision.gameObject.CompareTag("Victory"))
+        {
+            HUD.GetInstance().ShowVictory();
+        }
+
     }
 
     public override void TakeDamageFrom(AbstractController enmy, bool bumpRight, float force)
@@ -187,6 +196,6 @@ public class Perso_controler : AbstractController
 
     public override void DeathAnimTrigger()
     {
-        //game Over text. R to restart
+        HUD.GetInstance().ShowGameOver();
     }
 }

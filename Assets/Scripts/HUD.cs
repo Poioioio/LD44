@@ -36,16 +36,21 @@ public class HUD : MonoBehaviour
     public Image showCopper;
     public Image showSilver;
     public Image showGold;
+    public RawImage intro;
+    public RawImage gameOver;
+    public RawImage victory;
 
     private bool firstCopper = true;
     private bool firstSilver = true;
     private bool firstGold = true;
+
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         coinSound = GetComponent<AudioSource>();
+        intro.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -57,6 +62,9 @@ public class HUD : MonoBehaviour
             showCopper.gameObject.SetActive(false);
             showSilver.gameObject.SetActive(false);
             showGold.gameObject.SetActive(false);
+            intro.gameObject.SetActive(false);
+            gameOver.gameObject.SetActive(false);
+            victory.gameObject.SetActive(false);
         }
 
         if(Input.GetKeyDown(KeyCode.R))
@@ -119,5 +127,17 @@ public class HUD : MonoBehaviour
 
         coinSound.enabled = true;
         coinSound.Play();
+    }
+
+    public void ShowVictory()
+    {
+        Time.timeScale = 0f;
+        victory.gameObject.SetActive(true);
+    }
+
+    public void ShowGameOver()
+    {
+        Time.timeScale = 0f;
+        gameOver.gameObject.SetActive(true);
     }
 }
