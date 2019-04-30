@@ -7,6 +7,8 @@ public class BossController : AbstractEnemyController
     public float callCooldown;
     float timeSinceLastCall;
 
+    public AudioClip callSound;
+
     public List<GameObject> waves;
     int waveIndex = 0;
 
@@ -32,6 +34,7 @@ public class BossController : AbstractEnemyController
 
     public override void AbilityAnimTrigger()
     {
+        audioSource.PlayOneShot(callSound);
         waves[waveIndex].SetActive(true);
         waveIndex++;
         timeSinceLastCall = 0f;

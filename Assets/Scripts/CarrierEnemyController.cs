@@ -11,6 +11,8 @@ public class CarrierEnemyController : AbstractEnemyController
     public float timeSinceLoad = 2f;
     public float maxRange = 8;
 
+    public AudioClip releaseSound;
+
 
     void Update()
     {
@@ -40,6 +42,7 @@ public class CarrierEnemyController : AbstractEnemyController
         timeSinceLoad = 0f;
         Debug.Log("shoot " + transform.localScale);
         magpie.Release(handTransform.position, transform.localScale);
+        audioSource.PlayOneShot(releaseSound);
     }
 
     void Reload()
@@ -52,7 +55,10 @@ public class CarrierEnemyController : AbstractEnemyController
     public override void TakeDamageFrom(AbstractController enmy, bool bumpRight, float force)
     {
         if (loaded)
+        {
             magpie.Release(handTransform.position, transform.localScale);
+            audioSource.PlayOneShot(releaseSound);
+        }
 
         magpie.Flee();
 

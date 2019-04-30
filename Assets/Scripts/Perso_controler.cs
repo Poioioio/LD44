@@ -25,20 +25,23 @@ public class Perso_controler : AbstractController
 
     private Dictionary<string, int> inventory = new Dictionary<string, int>();
 
-
+    public AudioClip pelleSound;
+    public AudioClip hurtSound;
+    public AudioClip deathSound;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         rigid = GetComponent<Rigidbody2D>();
         flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
 
-        inventory["CopperCoin"] = 3;
+        inventory["CopperCoin"] = 0;
         inventory["SilverCoin"] = 0;
         inventory["GoldCoin"] = 0;
 
-        HUD.GetInstance().UpdateCopperCoin(inventory["CopperCoin"]);
+        //HUD.GetInstance().UpdateCopperCoin(inventory["CopperCoin"]);
     }
 
     // Update is called once per frame
@@ -114,17 +117,23 @@ public class Perso_controler : AbstractController
             rigid.velocity = Vector2.zero;
             Vector2 bumpDir = bumpRight ? Vector2.right : Vector2.left;
             rigid.AddForce(bumpDir * force);
+            bool dead = !HasCoins();
             if (inventory["CopperCoin"] > 0)
                 DropCoppers();
             else if (inventory["SilverCoin"] > 0)
                 DropSilvers();
             else if (inventory["GoldCoin"] > 0)
                 DropGolds();
-            
-            if( !HasCoins())
+
+            if (dead)
             {
                 anim.SetBool("Dead", true);
+                audioSource.PlayOneShot(deathSound);
                 enabled = false;
+            }
+            else
+            {
+                audioSource.PlayOneShot(hurtSound);
             }
             anim.SetTrigger("Hurt");
         }
@@ -162,6 +171,7 @@ public class Perso_controler : AbstractController
     public override void HitAnimTrigger()
     {
         List<Collider2D> targetList = new List<Collider2D>();
+        audioSource.PlayOneShot(pelleSound);
 
         if (0 < Physics2D.OverlapCollider(attackCollider, attackFilter, targetList))
         {

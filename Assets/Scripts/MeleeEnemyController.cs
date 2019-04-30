@@ -10,6 +10,8 @@ public class MeleeEnemyController : AbstractEnemyController
     public Collider2D attackCollider;
     public ContactFilter2D attackFilter;
 
+    public AudioClip swordSound;
+
     public float bumpForce = 100f;
 
     void FixedUpdate()
@@ -55,6 +57,7 @@ public class MeleeEnemyController : AbstractEnemyController
 
     public override void HitAnimTrigger()
     {
+        audioSource.PlayOneShot(swordSound);
         Collider2D[] target = new Collider2D[1];
 
         if (1 == Physics2D.OverlapCollider(attackCollider, attackFilter, target))

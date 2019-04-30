@@ -6,6 +6,10 @@ public class AbstractEnemyController : AbstractController
 {
     public float maxSpeed = .8f;
 
+
+    public AudioClip hurtSound;
+    public AudioClip deathSound;
+
     protected Rigidbody2D rigid;
     protected Animator anim;
     protected Flipper flipper;
@@ -25,8 +29,9 @@ public class AbstractEnemyController : AbstractController
 
 
     // Start is called before the first frame update
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponentInChildren<Animator>();
 
@@ -56,6 +61,7 @@ public class AbstractEnemyController : AbstractController
             life--;
             if (life <= 0)
             {
+                audioSource.PlayOneShot(deathSound);
                 anim.SetBool("Dead", true);
                 enabled = false;
                 wkCtrlr.enabled = false;
@@ -68,6 +74,7 @@ public class AbstractEnemyController : AbstractController
             }
             else
             {
+                audioSource.PlayOneShot(hurtSound);
                 enabled = true;
                 wkCtrlr.enabled = false;
             }

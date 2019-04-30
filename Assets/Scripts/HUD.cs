@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HUD : MonoBehaviour
 {
@@ -57,6 +58,12 @@ public class HUD : MonoBehaviour
             showSilver.gameObject.SetActive(false);
             showGold.gameObject.SetActive(false);
         }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void UpdateCopperCoin(int nb)
@@ -74,7 +81,8 @@ public class HUD : MonoBehaviour
         copperText.text = "Tibet coins : " + nb.ToString();
 
         coinSound.enabled = true;
-        coinSound.Play();
+        if( gotSome )
+            coinSound.Play();
     }
 
     public void UpdateSilverCoin(int nb)
