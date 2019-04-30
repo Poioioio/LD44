@@ -23,6 +23,7 @@ public class HUD : MonoBehaviour
         }
     }
     #endregion
+    AudioSource coinSound;
 
     public Text copperText;
     public Image copperImage;
@@ -43,6 +44,7 @@ public class HUD : MonoBehaviour
     void Start()
     {
         instance = this;
+        coinSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -70,6 +72,9 @@ public class HUD : MonoBehaviour
         copperText.gameObject.SetActive(gotSome);
         copperImage.gameObject.SetActive(gotSome);
         copperText.text = "Tibet coins : " + nb.ToString();
+
+        coinSound.enabled = true;
+        coinSound.Play();
     }
 
     public void UpdateSilverCoin(int nb)
@@ -85,6 +90,9 @@ public class HUD : MonoBehaviour
         silverText.gameObject.SetActive(gotSome);
         silverImage.gameObject.SetActive(gotSome);
         silverText.text = "Drachmes : " + nb.ToString();
+
+        coinSound.enabled = true;
+        coinSound.Play();
     }
 
     public void UpdateGoldCoin(int nb)
@@ -100,5 +108,8 @@ public class HUD : MonoBehaviour
         goldText.gameObject.SetActive(gotSome);
         goldImage.gameObject.SetActive(gotSome);
         goldText.text = "Stateres : " + nb.ToString();
+
+        coinSound.enabled = true;
+        coinSound.Play();
     }
 }
