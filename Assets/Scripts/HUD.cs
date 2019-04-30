@@ -73,7 +73,10 @@ public class HUD : MonoBehaviour
         {
             Time.timeScale = 1f;
             if( gameOver.gameObject.activeInHierarchy )
+            {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                return;
+            }
 
             showCopper.gameObject.SetActive(false);
             showSilver.gameObject.SetActive(false);
@@ -161,7 +164,9 @@ public class HUD : MonoBehaviour
     public void ShowGameOver(bool laugh = false)
     {
         Time.timeScale = 0f;
-        audioSource.PlayOneShot(evilLaugh);
+        if( laugh )
+            audioSource.PlayOneShot(evilLaugh);
+
         protag.enabled = false;
         gameOver.gameObject.SetActive(true);
     }

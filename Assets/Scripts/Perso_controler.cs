@@ -196,6 +196,6 @@ public class Perso_controler : AbstractController
 
     public override void DeathAnimTrigger()
     {
-        HUD.GetInstance().ShowGameOver();
+        HUD.GetInstance().ShowGameOver( true );
     }
 }
