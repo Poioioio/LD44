@@ -23,7 +23,7 @@ public class Perso_controler : AbstractController
 
     public float bumpForce = 100f;
 
-    private Dictionary<string, int> inventory = new Dictionary<string, int>();
+    private Dictionary<Item.Type, List<Item>> inventory = new Dictionary<Item.Type, List<Item>>();
 
     public AudioClip pelleSound;
     public AudioClip hurtSound;
@@ -36,12 +36,6 @@ public class Perso_controler : AbstractController
         rigid = GetComponent<Rigidbody2D>();
         flipper = GetComponent<Flipper>();
         anim = GetComponentInChildren<Animator>();
-
-        inventory["CopperCoin"] = 0;
-        inventory["SilverCoin"] = 0;
-        inventory["GoldCoin"] = 0;
-
-        //HUD.GetInstance().UpdateCopperCoin(inventory["CopperCoin"]);
     }
 
     // Update is called once per frame
@@ -74,34 +68,46 @@ public class Perso_controler : AbstractController
 
         bool inputFire2 = grounded && Input.GetAxis("Fire2") > Mathf.Epsilon;
         anim.SetBool("Rob", inputFire2);
+
+        if( Input.GetKeyUp(KeyCode.C))
+        {
+            TakeDamageFrom(null, false, 0f);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Coin"))
+        if (collision.gameObject.CompareTag("Collectible"))
         {
             collision.gameObject.SetActive(false);
+            Item item = collision.gameObject.GetComponent<Item>();
+            if (item == null)
+                return;
 
-            if(inventory.ContainsKey(collision.name))
+            if(inventory.ContainsKey(item.type))
             {
-                inventory[collision.name] += 1;
+                inventory[item.type].Add(item);
             }
             else
             {
-                inventory.Add(collision.name, 1);
+                List<Item> list = new List<Item>();
+                list.Add(item);
+                inventory.Add(item.type, list);
             }
 
-            if (collision.name == "CopperCoin")
+            switch( item.type )
             {
-                HUD.GetInstance().UpdateCopperCoin(inventory["CopperCoin"]);
-            }
-            else if (collision.name == "SilverCoin")
-            {
-                HUD.GetInstance().UpdateSilverCoin(inventory["SilverCoin"]);
-            }
-            else if (collision.name == "GoldCoin")
-            {
-                HUD.GetInstance().UpdateGoldCoin(inventory["GoldCoin"]);
+                case Item.Type.copperCoin:
+                    HUD.GetInstance().UpdateCopperCoin(inventory[item.type].Count);
+                    break;
+                case Item.Type.silverCoin:
+                    HUD.GetInstance().UpdateSilverCoin(inventory[item.type].Count);
+                    break;
+                case Item.Type.goldCoin:
+                    HUD.GetInstance().UpdateGoldCoin(inventory[item.type].Count);
+                    break;
+                default:
+                    break;
             }
         }
         else if( collision.gameObject.CompareTag("Projectile"))
@@ -126,56 +132,54 @@ public class Perso_controler : AbstractController
             rigid.velocity = Vector2.zero;
             Vector2 bumpDir = bumpRight ? Vector2.right : Vector2.left;
             rigid.AddForce(bumpDir * force);
-            bool dead = !HasCoins();
-            if (inventory["CopperCoin"] > 0)
-                DropCoppers();
-            else if (inventory["SilverCoin"] > 0)
-                DropSilvers();
-            else if (inventory["GoldCoin"] > 0)
-                DropGolds();
+            Item.Type dropType = Item.Type.NONE;
+            for( int i = (int)Item.Type.copperCoin; i <= (int)Item.Type.goldCoin;++i )
+            {
+                Item.Type type = (Item.Type)i;
+                if (Has(type))
+                {
+                    dropType = type;
+                }
+            }
 
-            if (dead)
+            if( dropType != Item.Type.NONE )
+            {
+                DropAllItemsOfType(dropType);
+                audioSource.PlayOneShot(hurtSound);
+            }
+            else
             {
                 anim.SetBool("Dead", true);
                 audioSource.PlayOneShot(deathSound);
                 enabled = false;
             }
-            else
-            {
-                audioSource.PlayOneShot(hurtSound);
-            }
             anim.SetTrigger("Hurt");
         }
     }
 
-    bool HasCoins()
+    bool Has(Item.Type type )
     {
-        return ((inventory["CopperCoin"] > 0)
-            || (inventory["SilverCoin"] > 0)
-            || (inventory["GoldCoin"] > 0));
+        return (inventory.ContainsKey(type)) && (inventory[type].Count > 0);
     }
 
-    void DropCoppers()
+    void DropAllItemsOfType( Item.Type type )
     {
-        Debug.Log("DropCoppers : ");
-        inventory["CopperCoin"] = 0;
-        HUD.GetInstance().UpdateCopperCoin(0);
-    }
+        foreach (Item item in inventory[type])
+            item.Drop( transform.position );
 
-    void DropSilvers()
-    {
-        Debug.Log("DropSilvers");
-        inventory["SilverCoin"] = 0;
-        HUD.GetInstance().UpdateSilverCoin(0);
-    }
+        inventory[type].Clear();
 
-    void DropGolds()
-    {
-        Debug.Log("DropGolds");
-        inventory["GoldCoin"] = 0;
-        HUD.GetInstance().UpdateGoldCoin(0);
+        switch ( type )
+        {
+            case Item.Type.copperCoin:
+                HUD.GetInstance().UpdateCopperCoin(0); break;
+            case Item.Type.silverCoin:
+                HUD.GetInstance().UpdateSilverCoin(0); break;
+            case Item.Type.goldCoin:
+                HUD.GetInstance().UpdateGoldCoin(0); break;
+            default: break;
+        }
     }
-
 
     public override void HitAnimTrigger()
     {

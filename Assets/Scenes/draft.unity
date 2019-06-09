@@ -1262,6 +1262,7 @@ GameObject:
   - component: {fileID: 373056603}
   - component: {fileID: 373056607}
   - component: {fileID: 373056606}
+  - component: {fileID: 373056608}
   m_Layer: 0
   m_Name: arbre
   m_TagString: Untagged
@@ -1342,13 +1343,14 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.7754364, y: -0.62143517}
-  - {x: -0.46294403, y: -1.20677}
+  - {x: -1.8260021, y: -0.74278545}
+  - {x: -1.1644344, y: -1.1530905}
+  - {x: -0.42249107, y: -1.1258688}
 --- !u!68 &373056604
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -1360,7 +1362,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -1378,7 +1380,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -1396,7 +1398,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -1414,13 +1416,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: 2.310295, y: -3.6403384}
   - {x: 3.2559738, y: -3.7113886}
+--- !u!251 &373056608
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373056600}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!4 &391262927 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8541590901951007197, guid: a35f0f0d1c2ba9043964f099181427d8,
@@ -1477,7 +1498,7 @@ PrefabInstance:
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
@@ -2798,7 +2819,7 @@ PrefabInstance:
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
@@ -4923,11 +4944,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1277268699}
   - {fileID: 1353688513}
   - {fileID: 441342662}
   - {fileID: 973675784}
   - {fileID: 67285628}
-  - {fileID: 1277268699}
   - {fileID: 1514019933}
   - {fileID: 7645526851032595770}
   - {fileID: 457574954}
@@ -5957,6 +5978,7 @@ GameObject:
   - component: {fileID: 2019035444}
   - component: {fileID: 2019035446}
   - component: {fileID: 2019035445}
+  - component: {fileID: 2019035447}
   m_Layer: 0
   m_Name: canon_support
   m_TagString: Untagged
@@ -5989,14 +6011,14 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
   m_Points:
-  - {x: -2.837554, y: -1.0761802}
-  - {x: -1.4545078, y: -0.18991423}
-  - {x: 0.45729637, y: 0.6836908}
+  - {x: -3.117918, y: -1.4999857}
+  - {x: -1.3762665, y: -0.3920369}
+  - {x: 0.3986168, y: 0.50112844}
 --- !u!212 &2019035446
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6045,6 +6067,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!251 &2019035447
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2019035443}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &2056732750
 GameObject:
   m_ObjectHideFlags: 0
@@ -6174,7 +6215,7 @@ PrefabInstance:
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
@@ -6288,6 +6329,7 @@ GameObject:
   - component: {fileID: 2102126193}
   - component: {fileID: 2102126191}
   - component: {fileID: 2102126189}
+  - component: {fileID: 2102126190}
   m_Layer: 0
   m_Name: Galion
   m_TagString: Untagged
@@ -6322,13 +6364,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
   m_Points:
   - {x: 1.64505, y: -3.8565223}
   - {x: 6.638481, y: -1.5973759}
+--- !u!251 &2102126190
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102126187}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!68 &2102126191
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -6340,7 +6401,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
@@ -6369,7 +6430,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
@@ -6388,7 +6449,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
@@ -6406,7 +6467,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
@@ -6425,7 +6486,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
@@ -6443,7 +6504,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.1
@@ -6866,7 +6927,7 @@ PrefabInstance:
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9194393495214809987, guid: f367f84576a65dc4bbbc87adf1fb2017,
         type: 3}
@@ -7035,16 +7096,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7713280381433175807, guid: 4125c5afd780d784bb9e216de04fec91,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7713280381433175807, guid: 4125c5afd780d784bb9e216de04fec91,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4125c5afd780d784bb9e216de04fec91, type: 3}
 --- !u!1001 &8486105122209543707
@@ -7166,7 +7217,7 @@ PrefabInstance:
     - target: {fileID: 8541590901951007197, guid: a35f0f0d1c2ba9043964f099181427d8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8541590901951007197, guid: a35f0f0d1c2ba9043964f099181427d8,
         type: 3}
